@@ -13,16 +13,12 @@ use Silex\Application;
 
 $app = new Application();
 
-
-//////////////////////////////////////////////////////////////////
 // Configuration
 
-//@TODO debug
 $app['debug'] = true;
 
 $app['dataDirectoryPath'] = ROOT_PATH.'/data';
 
-//////////////////////////////////////////////////////////////////
 // Services
 
 $app['surveyAggregator'] = new RakotobeH\TechChalenge\Survey\Business\SurveyAggregator();
@@ -34,8 +30,12 @@ $app['surveyManager'] = new RakotobeH\TechChalenge\Survey\Business\SurveyManager
 
 $app['surveyControllerProvider'] = new RakotobeH\TechChalenge\Survey\SurveyControllerProvider();
 
+// Handlers
 
-//////////////////////////////////////////////////////////////////
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => ROOT_PATH.'/logs/development.log',
+));
+
 $app->error(function (\Exception $exception, Request $request, $code) {
     switch ($code) {
         case 404:
@@ -51,16 +51,12 @@ $app->view(function (array $result, Request $request) use ($app) {
     return $app->json($result);
 });
 
-
 $app->after(function (Request $request, Response $response) {
     $response->headers->set('Access-Control-Allow-Origin', '*');
 });
 
-//////////////////////////////////////////////////////////////////
+// Controllers
 $app->mount('/survey', $app['surveyControllerProvider']);
-
-
-
 
 $app->get('/', function () use ($app) {
     return ['test' => 'test2'];
