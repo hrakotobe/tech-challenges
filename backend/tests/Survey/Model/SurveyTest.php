@@ -1,8 +1,8 @@
 <?php
-namespace RakotobeH\TechChalenge\Survey\Tests;
+namespace RakotobeH\TechChalenge\Survey\Model\Tests;
 
 use PHPUnit\Framework\TestCase;
-use RakotobeH\TechChalenge\Survey\Survey;
+use RakotobeH\TechChalenge\Survey\Model\Survey;
 use VirtualFileSystem\FileSystem;
 
 class SurveyTest extends TestCase

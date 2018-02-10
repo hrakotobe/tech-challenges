@@ -25,9 +25,13 @@ $app['dataDirectoryPath'] = ROOT_PATH.'/data';
 //////////////////////////////////////////////////////////////////
 // Services
 
-$app['surveyManager'] = new RakotobeH\TechChalenge\Survey\SurveyManager(
-    $app['dataDirectoryPath']
+$app['surveyAggregator'] = new RakotobeH\TechChalenge\Survey\Business\SurveyAggregator();
+
+$app['surveyManager'] = new RakotobeH\TechChalenge\Survey\Business\SurveyManager(
+    $app['dataDirectoryPath'],
+    $app['surveyAggregator']
 );
+
 $app['surveyControllerProvider'] = new RakotobeH\TechChalenge\Survey\SurveyControllerProvider();
 
 

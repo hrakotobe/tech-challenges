@@ -20,6 +20,14 @@ class SurveyControllerProvider implements ControllerProviderInterface
             return $surveyList;
         });
 
+        $collection->get('/{code}', function (Application $app, $code) use ($surveyManager) {
+            $survey = $surveyManager->getAggregatedSurvey($code);
+            if ($survey === null) {
+                throw new NotFoundHttpException('Survey not found: '.$code);
+            }
+            return $survey;
+        });
+
         return $collection;
     }
 }

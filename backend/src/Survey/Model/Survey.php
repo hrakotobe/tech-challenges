@@ -1,5 +1,5 @@
 <?php
-namespace RakotobeH\TechChalenge\Survey;
+namespace RakotobeH\TechChalenge\Survey\Model;
 
 class Survey
 {
