@@ -12,11 +12,54 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 
 $app = new Application();
+
+
+//////////////////////////////////////////////////////////////////
+// Configuration
+
+//@TODO debug
+$app['debug'] = true;
+
+$app['dataDirectoryPath'] = ROOT_PATH.'/data';
+
+//////////////////////////////////////////////////////////////////
+// Services
+
+$app['surveyManager'] = new RakotobeH\TechChalenge\Survey\SurveyManager(
+    $app['dataDirectoryPath']
+);
+$app['surveyControllerProvider'] = new RakotobeH\TechChalenge\Survey\SurveyControllerProvider();
+
+
+//////////////////////////////////////////////////////////////////
+$app->error(function (\Exception $exception, Request $request, $code) {
+    switch ($code) {
+        case 404:
+            $message = 'Resource not found';
+            break;
+        default:
+            $message = 'An error occured ('.$code.')';
+    }
+    return new Response($message);
+});
+
+$app->view(function (array $result, Request $request) use ($app) {
+    return $app->json($result);
+});
+
+
 $app->after(function (Request $request, Response $response) {
     $response->headers->set('Access-Control-Allow-Origin', '*');
 });
+
+//////////////////////////////////////////////////////////////////
+$app->mount('/survey', $app['surveyControllerProvider']);
+
+
+
+
 $app->get('/', function () use ($app) {
-    return 'Status OK';
+    return ['test' => 'test2'];
 });
 
 $app->run();
