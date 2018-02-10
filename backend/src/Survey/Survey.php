@@ -53,4 +53,10 @@ class Survey
     {
         return $this->surveyData['survey'];
     }
+
+    public function getQuestionList()
+    {
+        return $this->surveyData['questions'];
+    }
+
 }
