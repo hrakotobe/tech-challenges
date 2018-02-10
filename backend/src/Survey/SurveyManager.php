@@ -31,11 +31,11 @@ class SurveyManager
             }
 
             $survey = Survey::createFromFile($surveyFileInfo->openFile('r'));
-            $id = $survey->getCode();
-            if (empty($resultList[$id])) {
-                $resultList[$id] = [];
-            }
-            $resultList[$id][] = $survey;
+            $this->forcePushArray(
+                $resultList,
+                $survey->getCode(),
+                $survey
+            );
         }
 
         return $resultList;
@@ -54,4 +54,19 @@ class SurveyManager
         );
     }
 
+
+    /**
+     * Guarantee a value is pushed into an array at the key specified.
+     * Container array is modified.
+     *
+     * @param &array $container
+     * @param string $key
+     * @param mixed $value
+     */
+    private function forcePushArray(&$container, $key, $value) {
+        if (empty($container[$key])) {
+            $container[$key] = [];
+        }
+        $container[$key][] = $value;
+    }
 }
