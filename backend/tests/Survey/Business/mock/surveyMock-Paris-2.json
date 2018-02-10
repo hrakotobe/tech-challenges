@@ -1,0 +1,22 @@
+{
+    "survey": {
+        "name": "Paris",
+        "code": "XX1"
+    },
+    "questions": [{
+        "type": "qcm",
+        "label": "What best sellers are available in your store?",
+        "options": ["Product 1", "Product 2"],
+        "answer": [true, false]
+    }, {
+        "type": "numeric",
+        "label": "Number of products?",
+        "options": null,
+        "answer": 690
+    }, {
+        "type": "date",
+        "label": "What is the visit date?",
+        "options": null,
+        "answer": "2017-06-09T00:00:00.000Z"
+    }]
+}

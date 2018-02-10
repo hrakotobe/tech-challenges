@@ -7,7 +7,7 @@
         "type": "qcm",
         "label": "What best sellers are available in your store?",
         "options": ["Product 1", "Product 2", "Product 3", "Product 4", "Product 5", "Product 6"],
-        "answer": [false, true, true, false, true, false]
+        "answer": [true, true, true, false, false, false]
     }, {
         "type": "numeric",
         "label": "Number of products?",
@@ -17,6 +17,6 @@
         "type": "date",
         "label": "What is the visit date?",
         "options": null,
-        "answer": "2017-06-09T00:00:00.000Z"
+        "answer": "2017-06-10T00:00:00.000Z"
     }]
 }
